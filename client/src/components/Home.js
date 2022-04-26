@@ -62,10 +62,9 @@ const Home = ({ user, logout }) => {
     });
   };
 
-  const postMessage = (body) => {
+  const postMessage = async (body) => {
     try {
-      const data = saveMessage(body);
-
+      const data = await saveMessage(body);
       if (!body.conversationId) {
         addNewConvo(body.recipientId, data.message);
       } else {
@@ -78,16 +77,50 @@ const Home = ({ user, logout }) => {
     }
   };
 
+  const moveUpdatedConvoToHead = (
+    prevConvos,
+    prevConvo,
+    updatedConvo,
+  ) => {
+    const index = prevConvos.indexOf(prevConvo);
+    return [
+      updatedConvo,
+      ...prevConvos.slice(0, index),
+      ...prevConvos.slice(index + 1)
+    ]
+  };
+
+  const getUpdatedConvo = (
+    prevConvo,
+    message,
+    isNewConvo = false
+  ) => {
+    const copy = structuredClone(prevConvo);
+    copy.messages = [...prevConvo.messages, message];
+    copy.latestMessageText = message.text;
+    if (isNewConvo) copy.id = message.conversationId;
+
+    return copy;
+  }
+
   const addNewConvo = useCallback(
     (recipientId, message) => {
-      conversations.forEach((convo) => {
-        if (convo.otherUser.id === recipientId) {
-          convo.messages.push(message);
-          convo.latestMessageText = message.text;
-          convo.id = message.conversationId;
-        }
-      });
-      setConversations(conversations);
+      const matchedConvos = conversations.filter(
+        (convo) => convo.otherUser.id === recipientId
+      );
+      if (matchedConvos.length === 1) {
+        const matchedConvo = matchedConvos[0];
+        const updatedConvo = getUpdatedConvo(
+          matchedConvo,
+          message,
+          true
+        );
+        setConversations((prev) => moveUpdatedConvoToHead(
+          prev,
+          matchedConvo,
+          updatedConvo
+        ));
+      }
     },
     [setConversations, conversations],
   );
@@ -105,13 +138,21 @@ const Home = ({ user, logout }) => {
         setConversations((prev) => [newConvo, ...prev]);
       }
 
-      conversations.forEach((convo) => {
-        if (convo.id === message.conversationId) {
-          convo.messages.push(message);
-          convo.latestMessageText = message.text;
-        }
-      });
-      setConversations(conversations);
+      const matchedConvos = conversations.filter(
+        (convo) => convo.id === message.conversationId
+      );
+      if (matchedConvos.length === 1) {
+        const matchedConvo = matchedConvos[0];
+        const updatedConvo = getUpdatedConvo(
+          matchedConvo,
+          message
+        );
+        setConversations((prev) => moveUpdatedConvoToHead(
+          prev,
+          matchedConvo,
+          updatedConvo
+        ));
+      }
     },
     [setConversations, conversations],
   );
@@ -182,7 +223,14 @@ const Home = ({ user, logout }) => {
     const fetchConversations = async () => {
       try {
         const { data } = await axios.get("/api/conversations");
-        setConversations(data);
+        if (data) {
+          const dataWithReverseMessages = data.map((conv) => {
+            const copyConv = structuredClone(conv);
+            copyConv.messages = conv.messages.reverse();
+            return copyConv;
+          })
+          setConversations(dataWithReverseMessages);
+        }
       } catch (error) {
         console.error(error);
       }

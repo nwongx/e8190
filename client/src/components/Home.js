@@ -140,23 +140,20 @@ const Home = ({ user, logout }) => {
         setConversations((prev) => [newConvo, ...prev]);
       }
 
-      const matchedConvos = conversations.filter(
-        (convo) => convo.id === message.conversationId
+      setConversations((prev) =>
+        prev.map((convo) => {
+          if (convo.id === message.conversationId) {
+            const convoCopy = { ...convo };
+            convoCopy.messages = [...convoCopy.messages, message];
+            convoCopy.latestMessageText = message.text;
+            return convoCopy;
+          } else {
+            return convo;
+          }
+        })
       );
-      if (matchedConvos.length === 1) {
-        const matchedConvo = matchedConvos[0];
-        const updatedConvo = getUpdatedConvo(
-          matchedConvo,
-          message
-        );
-        setConversations((prev) => moveUpdatedConvoToHead(
-          prev,
-          matchedConvo,
-          updatedConvo
-        ));
-      }
     },
-    [setConversations, conversations],
+    [setConversations],
   );
 
   const setActiveChat = (username) => {

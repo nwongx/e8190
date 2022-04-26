@@ -32,7 +32,7 @@ const getUpdatedConvo = (
   message,
   isNewConvo = false
 ) => {
-  const copy = structuredClone(prevConvo);
+  const copy = { ...prevConvo };
   copy.messages = [...prevConvo.messages, message];
   copy.latestMessageText = message.text;
   if (isNewConvo) copy.id = message.conversationId;
@@ -103,7 +103,7 @@ const Home = ({ user, logout }) => {
     }
   };
 
- 
+
 
   const addNewConvo = useCallback(
     (recipientId, message) => {
@@ -226,12 +226,12 @@ const Home = ({ user, logout }) => {
       try {
         const { data } = await axios.get("/api/conversations");
         if (data) {
-          const dataWithReverseMessages = data.map((conv) => {
-            const copyConv = structuredClone(conv);
-            copyConv.messages = conv.messages.reverse();
+          const dataWithReversedMessages = data.map((convo) => {
+            const copyConv = { ...convo };
+            copyConv.messages = convo.messages.reverse();
             return copyConv;
           })
-          setConversations(dataWithReverseMessages);
+          setConversations(dataWithReversedMessages);
         }
       } catch (error) {
         console.error(error);

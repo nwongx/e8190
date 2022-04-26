@@ -226,12 +226,10 @@ const Home = ({ user, logout }) => {
       try {
         const { data } = await axios.get("/api/conversations");
         if (data) {
-          const dataWithReversedMessages = data.map((convo) => {
-            const copyConv = { ...convo };
-            copyConv.messages = convo.messages.reverse();
-            return copyConv;
+          data.forEach((convo) => {
+            convo.messages = convo.messages.reverse();
           })
-          setConversations(dataWithReversedMessages);
+          setConversations(data);
         }
       } catch (error) {
         console.error(error);

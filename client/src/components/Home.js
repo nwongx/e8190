@@ -14,6 +14,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const moveUpdatedConvoToHead = (
+  prevConvos,
+  prevConvo,
+  updatedConvo,
+) => {
+  const index = prevConvos.indexOf(prevConvo);
+  return [
+    updatedConvo,
+    ...prevConvos.slice(0, index),
+    ...prevConvos.slice(index + 1)
+  ]
+};
+
+const getUpdatedConvo = (
+  prevConvo,
+  message,
+  isNewConvo = false
+) => {
+  const copy = structuredClone(prevConvo);
+  copy.messages = [...prevConvo.messages, message];
+  copy.latestMessageText = message.text;
+  if (isNewConvo) copy.id = message.conversationId;
+
+  return copy;
+}
+
 const Home = ({ user, logout }) => {
   const history = useHistory();
 
@@ -77,31 +103,7 @@ const Home = ({ user, logout }) => {
     }
   };
 
-  const moveUpdatedConvoToHead = (
-    prevConvos,
-    prevConvo,
-    updatedConvo,
-  ) => {
-    const index = prevConvos.indexOf(prevConvo);
-    return [
-      updatedConvo,
-      ...prevConvos.slice(0, index),
-      ...prevConvos.slice(index + 1)
-    ]
-  };
-
-  const getUpdatedConvo = (
-    prevConvo,
-    message,
-    isNewConvo = false
-  ) => {
-    const copy = structuredClone(prevConvo);
-    copy.messages = [...prevConvo.messages, message];
-    copy.latestMessageText = message.text;
-    if (isNewConvo) copy.id = message.conversationId;
-
-    return copy;
-  }
+ 
 
   const addNewConvo = useCallback(
     (recipientId, message) => {

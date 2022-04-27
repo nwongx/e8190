@@ -14,32 +14,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const moveUpdatedConvoToHead = (
-  prevConvos,
-  prevConvo,
-  updatedConvo,
-) => {
-  const index = prevConvos.indexOf(prevConvo);
-  return [
-    updatedConvo,
-    ...prevConvos.slice(0, index),
-    ...prevConvos.slice(index + 1)
-  ]
-};
-
-const getUpdatedConvo = (
-  prevConvo,
-  message,
-  isNewConvo = false
-) => {
-  const copy = { ...prevConvo };
-  copy.messages = [...prevConvo.messages, message];
-  copy.latestMessageText = message.text;
-  if (isNewConvo) copy.id = message.conversationId;
-
-  return copy;
-}
-
 const Home = ({ user, logout }) => {
   const history = useHistory();
 
@@ -103,28 +77,23 @@ const Home = ({ user, logout }) => {
     }
   };
 
-
-
   const addNewConvo = useCallback(
     (recipientId, message) => {
-      const matchedConvos = conversations.filter(
-        (convo) => convo.otherUser.id === recipientId
+      setConversations((prev) =>
+        prev.map((convo) => {
+          if (convo.otherUser.id === recipientId) {
+            const convoCopy = { ...convo };
+            convoCopy.messages = [...convoCopy.messages, message];
+            convoCopy.latestMessageText = message.text;
+            convoCopy.id = message.conversationId;
+            return convoCopy;
+          } else {
+            return convo;
+          }
+        })
       );
-      if (matchedConvos.length === 1) {
-        const matchedConvo = matchedConvos[0];
-        const updatedConvo = getUpdatedConvo(
-          matchedConvo,
-          message,
-          true
-        );
-        setConversations((prev) => moveUpdatedConvoToHead(
-          prev,
-          matchedConvo,
-          updatedConvo
-        ));
-      }
     },
-    [setConversations, conversations],
+    [setConversations]
   );
   const addMessageToConversation = useCallback(
     (data) => {

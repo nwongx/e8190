@@ -16,19 +16,19 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 12
   },
   boxContainer: {
-    margin: "0 40px"
+    padding: "0 40px"
   },
   formControl: {
-    width: '100%'
+    width: "100%"
   },
   textFieldLabel: {
-    color: '#B0B0B0',
+    color: "#B0B0B0",
     "&.Mui-focused": {
-      color: '#B0B0B0'
+      color: "#B0B0B0"
     }
   },
   textFieldUnderline: {
-    '&:before': {
+    "&:before": {
       borderBottom: `1px solid #D5DFEE`
     },
   },
@@ -40,11 +40,14 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 3,
     width: 160,
     height: 56,
-    alignSelf: 'center'
+    alignSelf: "center"
   },
   createButtonLabel: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
   },
+  [theme.breakpoints.up("md")]: {
+    flex: 1
+  }
 
 }))
 
@@ -63,7 +66,7 @@ const SignupForm = ({ register }) => {
     const confirmPassword = formElements.confirmPassword.value;
 
     if (password !== confirmPassword) {
-      setFormErrorMessage({ confirmPassword: 'Passwords must match' });
+      setFormErrorMessage({ confirmPassword: "Passwords must match" });
       return;
     }
     await register({ username, email, password });

@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 12
   },
   boxContainer: {
-    margin: "0 20px"
+    margin: "0 40px"
   },
   formControl: {
     width: '100%'
@@ -48,16 +48,32 @@ const useStyles = makeStyles((theme) => ({
 
 }))
 
-const SignupForm = () => {
+const SignupForm = ({ register }) => {
 
   const [formErrorMessage, setFormErrorMessage] = useState({});
   const classes = useStyles();
+
+  const handleRegister = async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formElements = form.elements;
+    const username = formElements.username.value;
+    const email = formElements.email.value;
+    const password = formElements.password.value;
+    const confirmPassword = formElements.confirmPassword.value;
+
+    if (password !== confirmPassword) {
+      setFormErrorMessage({ confirmPassword: 'Passwords must match' });
+      return;
+    }
+    await register({ username, email, password });
+  };
 
   return (
     <Grid item>
       <Box className={classes.boxContainer}>
         <form
-          onSubmit={() => { }}>
+          onSubmit={handleRegister}>
           <Typography
             className={classes.header}
             variant="h5"

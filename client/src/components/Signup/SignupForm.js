@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import {
-  FormControl,
   Grid,
-  TextField,
   Typography,
-  FormHelperText,
   Button,
   Box,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import AccountTextField from "./AccountTextField";
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -20,17 +18,6 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     width: "100%"
-  },
-  textFieldLabel: {
-    color: "#B0B0B0",
-    "&.Mui-focused": {
-      color: "#B0B0B0"
-    }
-  },
-  textFieldUnderline: {
-    "&:before": {
-      borderBottom: `1px solid #D5DFEE`
-    },
   },
   createButtonContainer: {
     alignSelf: "center",
@@ -89,98 +76,42 @@ const SignupForm = ({ register }) => {
             spacing={5}
           >
             <Grid item>
-              <FormControl className={classes.formControl}>
-                <TextField
-                  aria-label="username"
-                  label="Username"
-                  name="username"
-                  type="text"
-                  InputLabelProps={{
-                    className: classes.textFieldLabel,
-                    required: false
-                  }}
-                  InputProps={{
-                    classes: {
-                      underline: classes.textFieldUnderline
-                    }
-                  }}
-                  required
-                />
-              </FormControl>
+              <AccountTextField
+                ariaLabel="username"
+                label="Username"
+                name="username"
+                type="text"
+                required
+              />
             </Grid>
             <Grid item>
-              <FormControl className={classes.formControl}>
-                <TextField
-                  label="E-mail address"
-                  aria-label="e-mail address"
-                  type="email"
-                  name="email"
-                  InputLabelProps={{
-                    className: classes.textFieldLabel,
-                    required: false
-                  }}
-                  InputProps={{
-                    classes: {
-                      underline: classes.textFieldUnderline
-                    }
-                  }}
-                  required
-                />
-              </FormControl>
+              <AccountTextField
+                ariaLabel="E-mail address"
+                label="E-mail address"
+                type="email"
+                name="email"
+                required
+              />
             </Grid>
             <Grid item>
-              <FormControl
-                className={classes.formControl}
-                error={!!formErrorMessage.confirmPassword}
-              >
-                <TextField
-                  aria-label="password"
-                  label="Password"
-                  type="password"
-                  inputProps={{ minLength: 6 }}
-                  name="password"
-                  InputLabelProps={{
-                    className: classes.textFieldLabel,
-                    required: false
-                  }}
-                  InputProps={{
-                    classes: {
-                      underline: classes.textFieldUnderline
-                    }
-                  }}
-                  required
-                />
-                <FormHelperText>
-                  {formErrorMessage.confirmPassword}
-                </FormHelperText>
-              </FormControl>
+              <AccountTextField
+                ariaLabel="password"
+                label="Password"
+                type="password"
+                name="password"
+                formErrorMessage={formErrorMessage}
+                required
+              />
             </Grid>
             <Grid item>
-              <FormControl
-                className={classes.formControl}
-                error={!!formErrorMessage.confirmPassword}
-              >
-                <TextField
-                  label="Confirm Password"
-                  aria-label="confirm password"
-                  type="password"
-                  inputProps={{ minLength: 6 }}
-                  name="confirmPassword"
-                  InputLabelProps={{
-                    className: classes.textFieldLabel,
-                    required: false
-                  }}
-                  InputProps={{
-                    classes: {
-                      underline: classes.textFieldUnderline
-                    }
-                  }}
-                  required
-                />
-                <FormHelperText>
-                  {formErrorMessage.confirmPassword}
-                </FormHelperText>
-              </FormControl>
+              <AccountTextField
+                ariaLabel="confirm password"
+                label="Confirm Password"
+                type="password"
+                name="confirmPassword"
+                formErrorMessage={formErrorMessage}
+                required
+              />
             </Grid>
             <Grid
               className={classes.createButtonContainer}

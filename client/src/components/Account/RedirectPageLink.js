@@ -27,7 +27,8 @@ const useStyles = makeStyles((theme) => {
     },
     loginLinkButton: {
       borderRadius: 5,
-      width: 140,
+      padding: "0 33px",
+      minWidth: 140,
       height: 54,
       backgroundColor: "#FFFFFF",
       boxShadow: "0px 2px 12px rgba(74, 106, 149, 0.2)"
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => {
   }
 })
 
-const LoginPageLink = () => {
+const RedirectPageLink = ({ href, question, buttonLabel }) => {
   const classes = useStyles();
 
   return (
@@ -49,11 +50,11 @@ const LoginPageLink = () => {
       <Typography
         className={classes.accountQuestionLabel}
       >
-        Already have an account?
+        {question}
       </Typography>
       <Link
-        href="/login"
-        to="/login"
+        href={href}
+        to={href}
         style={{ textDecoration: "none" }}
       >
         <Button
@@ -63,11 +64,11 @@ const LoginPageLink = () => {
           }}
           variant="contained"
         >
-          Login
+          {buttonLabel}
         </Button>
       </Link>
     </Grid>
   )
 }
 
-export default LoginPageLink;
+export default RedirectPageLink;

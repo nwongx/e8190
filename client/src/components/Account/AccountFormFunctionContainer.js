@@ -3,8 +3,7 @@ import {
   Grid,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import LoginPageLink from "./LoginPageLink";
-import SignupForm from "./SignupForm";
+import RedirectPageLink from "./RedirectPageLink";
 import AccountDivider from './AccountDivider';
 
 const useStyles = makeStyles((theme) => {
@@ -20,16 +19,16 @@ const useStyles = makeStyles((theme) => {
         justifyContent: "flex-start"
       }
     },
-    singupFormContainer: {
-      [theme.breakpoints.up("md")]: {
-        flex: 1,
-        justifyContent: "center"
-      }
-    }
+   
   }
 });
 
-const AccountSection = ({ register }) => {
+const AccountFormFunctionContainer = ({
+  href,
+  question,
+  buttonLabel,
+  children
+}) => {
   const classes = useStyles();
   return (
     <Grid
@@ -40,18 +39,15 @@ const AccountSection = ({ register }) => {
       sm={12}
       md={7}
     >
-      <LoginPageLink />
+      <RedirectPageLink
+        href={href}
+        question={question}
+        buttonLabel={buttonLabel}
+      />
       <AccountDivider />
-      <Grid
-        className={classes.singupFormContainer}
-        container
-        item
-        direction="column"
-      >
-        <SignupForm register={register} />
-      </Grid>
+      {children}
     </Grid>
   )
 }
 
-export default AccountSection;
+export default AccountFormFunctionContainer;

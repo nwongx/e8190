@@ -8,7 +8,10 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "95%"
+    width: "100%",
+    [theme.breakpoints.up('md')]: {
+      width: "95%"
+    }
   },
   [theme.breakpoints.up("md")]: {
     flex: 1

@@ -24,13 +24,22 @@ const useStyles = makeStyles((theme) => ({
     position: "relative"
   },
   introText: {
-    color: "white",
+    color: theme.palette.common.white,
+    textAlign: "center"
   }
 }));
 
+const svgStyle = {
+  position: "absolute",
+  margin: "0 auto",
+  top: -107,
+  left: 0,
+  right: 0,
+}
+
 const Background = () => {
   const classes = useStyles();
-  
+
   return (
     <Grid
       className={classes.root}
@@ -43,19 +52,12 @@ const Background = () => {
         item
       >
         <img
-          style={{
-            position: "absolute",
-            margin: "0 auto",
-            top: -107,
-            left: 0,
-            right: 0,
-          }}
+          style={svgStyle}
           src="./bubble.svg"
-          alt="bubble.svg"
+          alt="bubble icon"
         />
         <Typography
           className={classes.introText}
-          align="center"
           variant="h5"
         >
           Converse with anyone<br />with any language

@@ -23,14 +23,13 @@ const useStyles = makeStyles((theme) => {
         marginBottom: 0,
         marginRight: 30,
       }
-
     },
     loginLinkButton: {
       borderRadius: 5,
       padding: "0 33px",
       minWidth: 140,
       height: 54,
-      backgroundColor: "#FFFFFF",
+      backgroundColor: theme.palette.common.white,
       boxShadow: "0px 2px 12px rgba(74, 106, 149, 0.2)"
     },
     loginLinkButtonLabel: {
@@ -38,6 +37,10 @@ const useStyles = makeStyles((theme) => {
     }
   }
 })
+
+const linkStyle = {
+  textDecoration: "none"
+};
 
 const RedirectPageLink = ({ href, question, buttonLabel }) => {
   const classes = useStyles();
@@ -55,7 +58,7 @@ const RedirectPageLink = ({ href, question, buttonLabel }) => {
       <Link
         href={href}
         to={href}
-        style={{ textDecoration: "none" }}
+        style={linkStyle}
       >
         <Button
           className={classes.loginLinkButton}

@@ -1,19 +1,17 @@
-import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import {
   AccountFormBgContainer,
   AccountFormContainer,
   AccountFormFunctionContainer,
   LoginForm,
-} from './components/Account';
-
-
+} from "./components/Account";
 
 const Login = ({ user, login }) => {
   const history = useHistory();
 
   useEffect(() => {
-    if (user && user.id) history.push('/home');
+    if (user && user.id) history.push("/home");
   }, [user, history]);
 
   return (

@@ -7,7 +7,6 @@ import {
   AccountFormContainer
 } from "./components/Account";
 
-
 const Signup = ({ user, register }) => {
   const history = useHistory();
 

@@ -10,14 +10,14 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: "center",
   },
   createButton: {
-    background: "#3A8DFF",
+    background: theme.palette.primary.main,
     borderRadius: 3,
     width: 160,
     height: 56,
     alignSelf: "center"
   },
   createButtonLabel: {
-    color: "#FFFFFF",
+    color: theme.palette.common.white,
   }
 }))
 

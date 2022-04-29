@@ -10,6 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => {
   return {
     root: {
+      flexDirection: "column",
       [theme.breakpoints.up("md")]: {
         flex: 1,
         justifyContent: "center"
@@ -38,7 +39,6 @@ const AccountFormContainer = ({
       className={classes.root}
       container
       item
-      direction="column"
     >
       <Grid item>
         <Box className={classes.boxContainer}>

@@ -6,7 +6,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  bgContainer: {
+  root: {
     display: "none",
     [theme.breakpoints.up("md")]: {
       display: "flex",
@@ -33,7 +33,7 @@ const Background = () => {
   
   return (
     <Grid
-      className={classes.bgContainer}
+      className={classes.root}
       container
       item
       md={5}

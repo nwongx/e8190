@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => {
   return {
-    container: {
+    root: {
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => {
       }
     },
     accountQuestionLabel: {
-      color: "#B0B0B0",
+      color: theme.palette.secondary.main,
       textAlign: "center",
       marginBottom: 8,
       marginRight: 0,
@@ -44,7 +44,7 @@ const RedirectPageLink = ({ href, question, buttonLabel }) => {
 
   return (
     <Grid
-      className={classes.container}
+      className={classes.root}
       container
     >
       <Typography

@@ -7,7 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => {
   return {
-    dividerContainer: {
+    root: {
       [theme.breakpoints.up("md")]: {
         display: "none"
       }
@@ -19,7 +19,7 @@ const AccountDivider = () => {
   const classes = useStyles();
   return (
     <Grid
-      className={classes.dividerContainer}
+      className={classes.root}
       item
     >
       <Divider variant="middle" light />

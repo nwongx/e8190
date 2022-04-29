@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import {
   Grid,
 } from "@material-ui/core";
-import AccountTextField from "../Account/AccountTextField";
-import SubmitButton from "../Account/SubmitButton";
+import {
+  AccountTextField,
+  SubmitButton
+} from "./index";
 
 
 const SignupForm = ({ register }) => {

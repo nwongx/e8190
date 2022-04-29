@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import AccountFormFunctionContainer from "./components/Account/AccountFormFunctionContainer";
-import AccountFormBgContainer from "./components/Account/AccountFormBgContainer";
-import SignupForm from "./components/Signup/SignupForm";
-import AccountFormContainer from "./components/Account/AccountFormContainer";
+import {
+  AccountFormFunctionContainer,
+  AccountFormBgContainer,
+  SignupForm,
+  AccountFormContainer
+} from "./components/Account";
 
 
 const Signup = ({ user, register }) => {

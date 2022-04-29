@@ -1,9 +1,12 @@
 import React from "react";
 import {
+  Button,
   Grid,
 } from "@material-ui/core";
-import AccountTextField from "../Account/AccountTextField";
-import SubmitButton from "../Account/SubmitButton";
+import {
+  AccountTextField,
+  SubmitButton
+} from "./index";
 
 const LoginForm = ({ login }) => {
 
@@ -40,6 +43,7 @@ const LoginForm = ({ login }) => {
             label="Password"
             type="password"
             name="password"
+            endAdornment={<Button color="primary">Forgot?</Button>}
             required
           />
         </Grid>

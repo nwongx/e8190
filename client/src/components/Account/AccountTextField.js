@@ -7,24 +7,12 @@ import {
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
-  formControl: {
+  root: {
     width: "100%"
-  },
-  textFieldLabel: {
-    color: "#B0B0B0",
-    "&.Mui-focused": {
-      color: "#B0B0B0"
-    }
-  },
-  textFieldUnderline: {
-    "&:before": {
-      borderBottom: `1px solid #D5DFEE`
-    },
   },
   [theme.breakpoints.up("md")]: {
     flex: 1
   }
-
 }))
 
 const AccountTextField = ({
@@ -34,13 +22,14 @@ const AccountTextField = ({
   name,
   required,
   formErrorMessage,
+  endAdornment,
   ...textFieldProps
 }) => {
   const classes = useStyles();
 
   return (
     <FormControl
-      className={classes.formControl}
+      className={classes.root}
       error={formErrorMessage ? !!formErrorMessage.confirmPassword : undefined}
     >
       <TextField
@@ -49,14 +38,8 @@ const AccountTextField = ({
         type={type}
         inputProps={type === "password" ? { minLength: 6 } : {}}
         name={name}
-        InputLabelProps={{
-          className: classes.textFieldLabel,
-          required: false
-        }}
         InputProps={{
-          classes: {
-            underline: classes.textFieldUnderline
-          }
+          endAdornment,
         }}
         required={required}
         {...textFieldProps}

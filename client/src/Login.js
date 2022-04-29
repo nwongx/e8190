@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import AccountFormBgContainer from "./components/Account/AccountFormBgContainer";
-import AccountFormContainer from './components/Account/AccountFormContainer';
-import AccountFormFunctionContainer from './components/Account/AccountFormFunctionContainer';
-import LoginForm from './components/Login/LoginForm';
+import {
+  AccountFormBgContainer,
+  AccountFormContainer,
+  AccountFormFunctionContainer,
+  LoginForm,
+} from './components/Account';
+
 
 
 const Login = ({ user, login }) => {
   const history = useHistory();
-
-
 
   useEffect(() => {
     if (user && user.id) history.push('/home');

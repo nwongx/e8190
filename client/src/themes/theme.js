@@ -1,5 +1,8 @@
 import { createMuiTheme } from "@material-ui/core";
 
+const primaryMainColor = "#3A8DFF";
+const secondaryMainColor = "#B0B0B0";
+
 export const theme = createMuiTheme({
   typography: {
     fontFamily: "Open Sans, sans-serif",
@@ -13,12 +16,32 @@ export const theme = createMuiTheme({
   overrides: {
     MuiInput: {
       input: {
-        fontWeight: "bold"
+        fontWeight: "bold",
+        paddingLeft: 4
+      },
+      underline: {
+        "&:before": {
+          borderBottom: "1px solid #D5DFEE"
+        },
+      }
+    },
+    MuiInputLabel: {
+      root: {
+        color: secondaryMainColor,
+        paddingLeft: 4,
+        "&.Mui-focused": {
+          color: secondaryMainColor
+        }
+      },
+    },
+    MuiFormLabel: {
+      asterisk: {
+        display: "none",
       }
     }
   },
   palette: {
-    primary: { main: "#3A8DFF" },
-    secondary: { main: "#B0B0B0" }
+    primary: { main: primaryMainColor },
+    secondary: { main: secondaryMainColor }
   }
 });

@@ -3,14 +3,17 @@ import {
   Grid,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import RedirectPageLink from "./RedirectPageLink";
-import AccountDivider from './AccountDivider';
+import {
+  RedirectPageLink,
+  AccountDivider
+} from "./index";
 
 const useStyles = makeStyles((theme) => {
   return {
     root: {
       widht: "100%",
       height: "100%",
+      flexWrap: "nowrap",
       flexDirection: "column",
       justifyContent: "center",
       margin: 0, // work around of mui grid spacing
@@ -19,7 +22,7 @@ const useStyles = makeStyles((theme) => {
         justifyContent: "flex-start"
       }
     },
-   
+
   }
 });
 

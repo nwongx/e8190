@@ -8,21 +8,21 @@ import Background from "./Background";
 const useStyles = makeStyles((theme) => {
   return {
     root: {
-      minHeight: 768,
+      minHeight: 600,
       height: "100vh",
       width: "100%",
+      flexDirection: "row"
     },
   }
 });
 
 const AccountFormBgContainer = ({ children }) => {
   const classes = useStyles();
-  
+
   return (
     <Grid
       className={classes.root}
       container
-      direction="row"
     >
       <Background />
       {children}

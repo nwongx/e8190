@@ -18,7 +18,7 @@ const Login = ({ user, login }) => {
     <AccountFormBgContainer>
       <AccountFormFunctionContainer
         href="/register"
-        question="Need to register?"
+        question="Don’t have an account?"
         buttonLabel="Create account"
       >
         <AccountFormContainer

@@ -43,7 +43,14 @@ const LoginForm = ({ login }) => {
             label="Password"
             type="password"
             name="password"
-            endAdornment={<Button color="primary">Forgot?</Button>}
+            endAdornment={
+              <Button
+                color="primary"
+                size="small"
+              >
+                Forgot?
+              </Button>
+            }
             required
           />
         </Grid>

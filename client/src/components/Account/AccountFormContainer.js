@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => {
       }
     },
     header: {
-      fontWeight: 600,
       marginBottom: 12
     },
     boxContainer: {

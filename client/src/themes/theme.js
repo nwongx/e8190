@@ -11,13 +11,18 @@ export const theme = createMuiTheme({
       textTransform: "none",
       letterSpacing: 0,
       fontWeight: "bold"
+    },
+    h5: { 
+      fontSize: "1.625rem",
+      fontWeight: "bold",
     }
   },
   overrides: {
     MuiInput: {
       input: {
         fontWeight: "bold",
-        paddingLeft: 4
+        paddingLeft: 4,
+        fontSize: "0.875rem"
       },
       underline: {
         "&:before": {
@@ -27,6 +32,7 @@ export const theme = createMuiTheme({
     },
     MuiInputLabel: {
       root: {
+        fontSize: "0.875rem",
         color: secondaryMainColor,
         paddingLeft: 4,
         "&.Mui-focused": {

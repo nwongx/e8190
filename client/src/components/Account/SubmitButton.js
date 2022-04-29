@@ -6,12 +6,13 @@ import {
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
-  createButtonContainer: {
+  root: {
     alignSelf: "center",
   },
   createButton: {
     background: theme.palette.primary.main,
     borderRadius: 3,
+    fontSize: "1rem",
     width: 160,
     height: 56,
     alignSelf: "center"
@@ -26,7 +27,7 @@ const SubmitButton = ({ children }) => {
 
   return (
     <Grid
-      className={classes.createButtonContainer}
+      className={classes.root}
       item
     >
       <Button

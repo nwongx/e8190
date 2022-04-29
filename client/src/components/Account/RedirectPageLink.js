@@ -52,6 +52,7 @@ const RedirectPageLink = ({ href, question, buttonLabel }) => {
     >
       <Typography
         className={classes.accountQuestionLabel}
+        variant="body2"
       >
         {question}
       </Typography>

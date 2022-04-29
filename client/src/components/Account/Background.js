@@ -25,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
   },
   introText: {
     color: theme.palette.common.white,
-    textAlign: "center"
+    textAlign: "center",
+    fontWeight: 400,
   }
 }));
 

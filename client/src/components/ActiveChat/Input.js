@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FormControl, FilledInput } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { SelectImgButton } from './index';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -15,9 +16,12 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+
+
 const Input = ({ otherUser, conversationId, user, postMessage }) => {
   const classes = useStyles();
   const [text, setText] = useState('');
+  const [uploadedImgs, setUploadedImgs] = useState([]);
 
   const handleChange = (event) => {
     setText(event.target.value);
@@ -33,6 +37,7 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
       recipientId: otherUser.id,
       conversationId,
       sender: conversationId ? null : user,
+      attachments: uploadedImgs
     };
     await postMessage(reqBody);
     setText('');
@@ -48,6 +53,9 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
           value={text}
           name="text"
           onChange={handleChange}
+          endAdornment={
+            <SelectImgButton onChange={setUploadedImgs}/>
+          }
         />
       </FormControl>
     </form>

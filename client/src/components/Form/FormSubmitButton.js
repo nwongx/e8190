@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const SubmitButton = ({ children }) => {
+const FormSubmitButton = ({ children }) => {
   const classes = useStyles();
 
   return (
@@ -44,4 +44,4 @@ const SubmitButton = ({ children }) => {
   )
 }
 
-export default SubmitButton;
+export default FormSubmitButton;

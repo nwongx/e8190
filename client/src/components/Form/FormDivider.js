@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Grid,
   Divider,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => {
   return {
     root: {
+      width: "100%",
       [theme.breakpoints.up("md")]: {
         display: "none"
       }
@@ -15,16 +15,14 @@ const useStyles = makeStyles((theme) => {
   }
 });
 
-const AccountDivider = () => {
+const FormDivider = () => {
   const classes = useStyles();
   return (
-    <Grid
+    <Divider
       className={classes.root}
-      item
-    >
-      <Divider variant="middle" light />
-    </Grid>
+      light
+    />
   )
 }
 
-export default AccountDivider;
+export default FormDivider;

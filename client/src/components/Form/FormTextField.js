@@ -18,18 +18,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const AccountTextField = ({
-  ariaLabel,
-  label,
-  type,
-  name,
-  required,
-  formErrorMessage,
-  endAdornment,
-  ...textFieldProps
+const FormTextField = ({
+  input
 }) => {
   const classes = useStyles();
-
+  const {
+    ariaLabel,
+    label,
+    type,
+    name,
+    required,
+    formErrorMessage,
+    endAdornment,
+    ...textFieldProps
+  } = input;
   return (
     <FormControl
       className={classes.root}
@@ -42,7 +44,7 @@ const AccountTextField = ({
         inputProps={type === "password" ? { minLength: 6 } : {}}
         name={name}
         InputProps={{
-          endAdornment,
+          endAdornment
         }}
         required={required}
         {...textFieldProps}
@@ -57,4 +59,4 @@ const AccountTextField = ({
   )
 }
 
-export default AccountTextField;
+export default FormTextField;

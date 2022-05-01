@@ -42,7 +42,7 @@ const linkStyle = {
   textDecoration: "none"
 };
 
-const RedirectPageLink = ({ href, question, buttonLabel }) => {
+const FormHeader = ({ href, question, buttonLabel }) => {
   const classes = useStyles();
 
   return (
@@ -75,4 +75,4 @@ const RedirectPageLink = ({ href, question, buttonLabel }) => {
   )
 }
 
-export default RedirectPageLink;
+export default FormHeader;

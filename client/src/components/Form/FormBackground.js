@@ -1,26 +1,23 @@
 import React from "react";
 import {
-  Grid,
   Typography,
+  Box
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      flexDirection: "column",
-      background: "linear-gradient(181deg, rgb(59, 141, 255, 0.8), rgb(134, 185, 255, 0.8)), url(./bg-img.png)",
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      width: "100%",
-      height: "100%"
-    }
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    background: "linear-gradient(181deg, rgb(59, 141, 255, 0.8), rgb(134, 185, 255, 0.8)), url(./bg-img.png)",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    width: "100%",
+    height: "100%"
   },
-  bgInnerGrid: {
+  contentContainer: {
     position: "relative"
   },
   introText: {
@@ -38,19 +35,15 @@ const svgStyle = {
   right: 0,
 }
 
-const Background = () => {
+const FormBackground = () => {
   const classes = useStyles();
 
   return (
-    <Grid
+    <Box
       className={classes.root}
-      container
-      item
-      md={5}
     >
-      <Grid
-        className={classes.bgInnerGrid}
-        item
+      <Box
+        className={classes.contentContainer}
       >
         <img
           style={svgStyle}
@@ -63,10 +56,10 @@ const Background = () => {
         >
           Converse with anyone<br />with any language
         </Typography>
-      </Grid>
-    </Grid>
+      </Box>
+    </Box>
   )
 }
 
 
-export default Background;
+export default FormBackground;

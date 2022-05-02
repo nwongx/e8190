@@ -5,6 +5,9 @@ import moment from 'moment';
 import SenderSingleImgBubble from './SenderSingleImgBubble';
 import SenderMultiImgBubble from './SenderMutiImgBubble';
 import SenderImgTextBubble from './SenderImgTextBubble';
+import OtherUserSingleImgBubble from './OtherSingleImgBubble';
+import OtherUserImgTextBubble from './OtherUserImgTextBubble';
+import OtherUserMultiImgBubble from './OtherUserMutiImgBubble';
 
 const Messages = (props) => {
   const { messages, otherUser, userId } = props;
@@ -26,12 +29,17 @@ const Messages = (props) => {
                 <SenderMultiImgBubble key={message.id} urls={message.attachments} time={time} />
             )
         ) : (
-          <OtherUserBubble
-            key={message.id}
-            text={message.text}
-            time={time}
-            otherUser={otherUser}
-          />
+          !message.attachments || message.attachments.length === 0 ?
+          <OtherUserBubble key={message.id} text={message.text} time={time}  otherUser={otherUser}/> :
+          (
+            message.attachments.length === 1 ?
+              (
+                message.text.length === 0 ?
+                  <OtherUserSingleImgBubble  key={message.id} url={message.attachments[0]} time={time} otherUser={otherUser}/> :
+                  <OtherUserImgTextBubble key={message.id} url={message.attachments[0]} time={time} text={message.text} otherUser={otherUser}/>
+              ) :
+              <OtherUserMultiImgBubble key={message.id} urls={message.attachments} time={time} otherUser={otherUser}/>
+          )
         );
       })}
     </Box>

@@ -1,53 +1,41 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, Typography } from '@material-ui/core';
-import SenderImgBubble from './SenderImgBubble';
+import { Box } from '@material-ui/core';
+import {
+  SenderImg,
+  SenderTextBubble
+} from "./index";
 
 const useStyles = makeStyles(() => ({
   root: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-end',
-  },
-  date: {
-    fontSize: 11,
-    color: '#BECCE2',
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  contentContainer: {
     width: 135,
   },
   imgContainer: {
-    aspectRatio: "16/14"
+    aspectRatio: "1",
   },
-  text: {
-    fontSize: 14,
-    color: '#91A3C0',
-    letterSpacing: -0.2,
-    padding: 8,
-    fontWeight: 'bold',
-  },
-  bubble: {
-    background: '#F4F6FA',
-    borderRadius: '0 0 0 10px',
-  },
+  imgWithTextContainer: {
+    aspectRatio: "16/14",
+  }
 }));
 
-const SenderImgTextBubble = ({ time, url, text }) => {
+const SenderImgTextBubble = ({ url, text }) => {
   const classes = useStyles();
 
   return (
     <Box className={classes.root}>
-      <Typography className={classes.date}>{time}</Typography>
-      <Box className={classes.contentContainer}>
-        <Box className={classes.imgContainer}>
-          <SenderImgBubble url={url} hasText />
-        </Box>
-        <Box className={classes.bubble}>
-          <Typography className={classes.text}>{text}</Typography>
-        </Box>
+      <Box className={
+        text ?
+          classes.imgWithTextContainer :
+          classes.imgContainer}
+      >
+        <SenderImg url={url} hasText={text} />
       </Box>
+      {
+        text && <SenderTextBubble
+          text={text}
+          hasImg
+        />
+      }
     </Box>
   );
 };

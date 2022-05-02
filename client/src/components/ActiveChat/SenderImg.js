@@ -1,6 +1,6 @@
 import React from "react";
 
-const SenderImgBubble = ({ url, hasText }) => {
+const SenderImg = ({ url, hasText }) => {
   return (
     <img
         style={{
@@ -16,4 +16,4 @@ const SenderImgBubble = ({ url, hasText }) => {
   )
 }
 
-export default SenderImgBubble;
+export default SenderImg;

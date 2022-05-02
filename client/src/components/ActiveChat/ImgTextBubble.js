@@ -2,12 +2,12 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import {
-  SenderImg,
-  SenderTextBubble
-} from "./index";
+  MessageImg,
+  TextBubble
+} from './index';
 
 const useStyles = makeStyles(() => ({
-  root: {
+  contentContainer: {
     width: 135,
   },
   imgContainer: {
@@ -18,26 +18,31 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const SenderImgTextBubble = ({ url, text }) => {
+const ImgTextBubble = ({ url, text, isOtherUser }) => {
   const classes = useStyles();
-
   return (
-    <Box className={classes.root}>
+    <Box className={classes.contentContainer}>
       <Box className={
         text ?
           classes.imgWithTextContainer :
           classes.imgContainer}
       >
-        <SenderImg url={url} hasText={text} />
+        <MessageImg
+          url={url}
+          hasText={text}
+          isOtherUser={isOtherUser}
+        />
       </Box>
       {
-        text && <SenderTextBubble
+        text && <TextBubble
           text={text}
           hasImg
+          isOtherUser={isOtherUser}
         />
       }
     </Box>
+
   );
 };
 
-export default SenderImgTextBubble;
+export default ImgTextBubble;

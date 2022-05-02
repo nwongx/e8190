@@ -1,11 +1,11 @@
-export { default as SenderTextBubble } from "./SenderTextBubble";
-export { default as OtherUserBubble } from "./OtherUserBubble";
+export { default as TextBubble } from "./TextBubble";
 export { default as ActiveChat } from "./ActiveChat";
 export { default as Input } from "./Input";
 export { default as Header } from "./Header";
 export { default as Messages } from "./Messages";
 export { default as SelectImgButton } from "./SelectImgButton";
+export { default as MessageImg } from "./MessageImg";
+export { default as MultiImgBubble } from "./MultiImgBubble";
+export { default as ImgTextBubble } from "./ImgTextBubble";
 export { default as SenderBubbleWrapper } from "./SenderBubbleWrapper";
-export { default as SenderImg } from "./SenderImg";
-export { default as SenderImgTextBubble } from "./SenderImgTextBubble";
-export { default as SenderMultiImgBubble } from "./SenderMultiImgBubble";
+export { default as OtherUserBubbleWrapper } from "./OtherUserWrapper";

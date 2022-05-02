@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
-import { SenderImg } from './index';
+import MessageImg from './MessageImg';
 
 const useStyles = makeStyles(() => ({
   imgsContainer: {
@@ -15,14 +15,18 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const SenderMultiImgBubble = ({ urls }) => {
+const MultiImgBubble = ({ urls, isOtherUser }) => {
   const classes = useStyles();
   return (
+
     <Box className={classes.imgsContainer}>
       {
         urls && urls.map((url) => (
           <Box key={url} className={classes.imgContainer}>
-            <SenderImg url={url} />
+            <MessageImg
+              url={url}
+              isOtherUser={isOtherUser}
+            />
           </Box>
         ))
       }
@@ -30,4 +34,4 @@ const SenderMultiImgBubble = ({ urls }) => {
   );
 };
 
-export default SenderMultiImgBubble;
+export default MultiImgBubble;

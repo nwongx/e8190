@@ -1,4 +1,9 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
+import {
+  TextBubble,
+  ImgTextBubble,
+  MultiImgBubble
+} from "./components/ActiveChat"
 
 export const TEXT_TYPE = "TEXT";
 export const IMG_TYPE = "IMG";
@@ -30,4 +35,36 @@ export const useBubbleType = ({ text, attachments }) => {
   }, [text, attachments, setType])
 
   return type;
+}
+
+export const useBubbleFactory = (isOtherUser = false) => {
+  const memoizedBubbleFactory = useCallback((bubbleType) => {
+    switch (bubbleType) {
+      case TEXT_TYPE:
+        return ({ text }) => <TextBubble
+          text={text}
+          isOtherUser={isOtherUser}
+        />;
+      case IMG_TYPE:
+        return ({ attachments }) => <ImgTextBubble
+          url={attachments[0]}
+          isOtherUser={isOtherUser}
+        />
+      case IMG_TEXT_TYPE:
+        return ({ attachments, text }) => <ImgTextBubble
+          url={attachments[0]}
+          text={text}
+          isOtherUser={isOtherUser}
+        />
+      case MULTI_IMG_TYPE:
+        return ({ attachments }) => <MultiImgBubble
+          urls={attachments}
+          isOtherUser={isOtherUser}
+        />
+      default:
+        return () => <></>
+    }
+  }, [isOtherUser])
+
+  return memoizedBubbleFactory;
 }

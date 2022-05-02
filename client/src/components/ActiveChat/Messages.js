@@ -5,9 +5,13 @@ import {
   SenderBubbleWrapper,
   OtherUserBubbleWrapper
 } from './index';
+import { useBubbleFactory } from '../../hook';
 
 const Messages = (props) => {
   const { messages, otherUser, userId } = props;
+  const senderBubbleFactory = useBubbleFactory();
+  const otherUserFactory = useBubbleFactory(true);
+
   return (
     <Box>
       {messages.map((message) => {
@@ -17,6 +21,7 @@ const Messages = (props) => {
             key={message.id}
             message={message}
             time={time}
+            bubbleFactory={senderBubbleFactory}
           />
         ) : (
           <OtherUserBubbleWrapper
@@ -24,6 +29,7 @@ const Messages = (props) => {
             message={message}
             time={time}
             otherUser={otherUser}
+            bubbleFactory={otherUserFactory}
           />
         )
       })

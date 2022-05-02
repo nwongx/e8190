@@ -1,18 +1,10 @@
 import { makeStyles } from "@material-ui/styles";
 import { Box, Typography, Avatar } from "@material-ui/core";
-import React, { useCallback } from "react";
+import React from "react";
 import {
-  IMG_TEXT_TYPE,
-  IMG_TYPE,
-  MULTI_IMG_TYPE,
-  TEXT_TYPE,
   useBubbleType
 } from "../../hook";
-import {
-  MultiImgBubble,
-  ImgTextBubble,
-} from './index';
-import TextBubble from "./TextBubble";
+
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -32,28 +24,9 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-const OtherUserBubbleWrapper = ({ otherUser, message, time }) => {
+const OtherUserBubbleWrapper = ({ otherUser, message, time, bubbleFactory }) => {
   const bubbleType = useBubbleType(message);
   const classes = useStyles();
-
-  const memoizedOtherUserbubbleFactory = useCallback(() => {
-    switch (bubbleType) {
-      case TEXT_TYPE:
-        return <TextBubble text={message.text} isOtherUser/>;
-      case IMG_TYPE:
-        return <ImgTextBubble url={message.attachments[0]} isOtherUser/>
-      case IMG_TEXT_TYPE:
-        return <ImgTextBubble
-          url={message.attachments[0]}
-          text={message.text}
-          isOtherUser
-        />
-      case MULTI_IMG_TYPE:
-        return <MultiImgBubble urls={message.attachments} isOtherUser/>
-      default:
-        return <></>;
-    }
-  }, [bubbleType, message])
 
   return (
     <Box className={classes.root}>
@@ -66,7 +39,7 @@ const OtherUserBubbleWrapper = ({ otherUser, message, time }) => {
         <Typography className={classes.usernameDate}>
           {otherUser.username} {time}
         </Typography>
-        {memoizedOtherUserbubbleFactory()}
+        {bubbleFactory(bubbleType)(message)}
       </Box>
     </Box>
   )

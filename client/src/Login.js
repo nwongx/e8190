@@ -1,18 +1,44 @@
-import React, { useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Button } from "@material-ui/core";
+import React, { useCallback, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import {
-  Grid,
-  Box,
-  Typography,
-  Button,
-  FormControl,
-  TextField,
-} from '@material-ui/core';
+  FormBodyWrapper,
+  FormBackground,
+  FormHeader,
+  FormLayout
+} from "./components/Form";
+import { useFormData } from "./hooks";
+import { isEmptyObject } from "./utils";
+
+// no dependency, declare outside the component
+const loginInputs = [
+  {
+    ariaLabel: "username",
+    label: "Username",
+    name: "username",
+    type: "text",
+    required: true,
+  },
+  {
+    ariaLabel: "password",
+    label: "Password",
+    name: "password",
+    type: "password",
+    endAdornment: (
+      <Button
+        color="primary"
+        size="small"
+      >
+        Forgot?
+      </Button>
+    ),
+    required: true,
+  }
+];
 
 const Login = ({ user, login }) => {
   const history = useHistory();
-
-  const handleLogin = async (event) => {
+  const memoizedLoginOnSubmit = useCallback( async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
     const formElements = form.elements;
@@ -20,51 +46,33 @@ const Login = ({ user, login }) => {
     const password = formElements.password.value;
 
     await login({ username, password });
-  };
+  }, [login])
+
+  const formData = useFormData(
+    loginInputs,
+    memoizedLoginOnSubmit
+  );
 
   useEffect(() => {
-    if (user && user.id) history.push('/home');
+    if (user && user.id) history.push("/home");
   }, [user, history]);
 
   return (
-    <Grid container justifyContent="center">
-      <Box>
-        <Grid container item>
-          <Typography>Need to register?</Typography>
-          <Link href="/register" to="/register">
-            <Button>Register</Button>
-          </Link>
-        </Grid>
-        <form onSubmit={handleLogin}>
-          <Grid>
-            <Grid>
-              <FormControl margin="normal" required>
-                <TextField
-                  aria-label="username"
-                  label="Username"
-                  name="username"
-                  type="text"
-                />
-              </FormControl>
-            </Grid>
-            <FormControl margin="normal" required>
-              <TextField
-                label="password"
-                aria-label="password"
-                type="password"
-                name="password"
-              />
-            </FormControl>
-            <Grid>
-              <Button type="submit" variant="contained" size="large">
-                Login
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-      </Box>
-    </Grid>
-  );
+    !isEmptyObject(formData) &&
+    <FormLayout
+      background={<FormBackground />}
+      formUpperSection={<FormHeader
+        href="/register"
+        question="Don’t have an account?"
+        buttonLabel="Create account"
+      />}
+      formBottomSection={<FormBodyWrapper
+        header="Welcome back!"
+        formData={formData}
+        buttonLabel="Login"
+      />}
+    />
+  )
 };
 
 export default Login;

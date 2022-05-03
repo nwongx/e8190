@@ -3,7 +3,7 @@ import { IconButton } from "@material-ui/core";
 import PhotoLibraryOutlinedIcon from '@material-ui/icons/PhotoLibraryOutlined';
 import axios from "axios";
 import SnackbarError from '../SnackbarError';
-import { createFormData } from '../../utils';
+import { createFormData, optimizeImgUrl } from '../../utils';
 
 /**
  * other Approaches
@@ -43,7 +43,7 @@ const SelectImgButton = ({ onChange }) => {
       if (imgs && imgs.length > 0) {
         try {
           const res = await uploadSignedImgs(imgs);
-          const urls = res.map(({ data }) => data.secure_url);
+          const urls = res.map(({ data }) => optimizeImgUrl(data.secure_url));
           onChange(urls);
         } catch (e) {
           setErrorMessage('Something went wrong, please try again');

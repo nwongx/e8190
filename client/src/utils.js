@@ -38,6 +38,7 @@ export const createFormData = async (img) => {
   const formData = new FormData();
   const timestamp = Math.floor(Date.now() / 1000);
 
+  // order matters!
   formData.append("timestamp", timestamp);
 
   const signature = await createSignuature(formData);
@@ -46,4 +47,10 @@ export const createFormData = async (img) => {
   formData.append("api_key", process.env.REACT_APP_API_KEY)
   formData.append("signature", signature);
   return formData;
+}
+
+export const optimizeImgUrl = (url) => {
+  const splits = url.split("load/");
+  if (splits.length !== 2) return url;
+  return  `https://res.cloudinary.com/dsoagesap/image/upload/w_250/dpr_auto/q_auto/f_auto/${splits[1]}`
 }

@@ -9,3 +9,4 @@ export { default as MultiImgBubble } from "./MultiImgBubble";
 export { default as ImgTextBubble } from "./ImgTextBubble";
 export { default as SenderBubbleWrapper } from "./SenderBubbleWrapper";
 export { default as OtherUserBubbleWrapper } from "./OtherUserWrapper";
+export { default as UnselectImgButton } from "./UnselectImgButton";

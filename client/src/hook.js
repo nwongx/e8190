@@ -1,3 +1,4 @@
+import { makeStyles } from "@material-ui/styles";
 import { useEffect, useState, useCallback } from "react"
 import {
   TextBubble,
@@ -68,3 +69,70 @@ export const useBubbleFactory = (isOtherUser = false) => {
 
   return memoizedBubbleFactory;
 }
+
+const useTextStyles = makeStyles(() => ({
+  textColor: {
+    color: "#91A3C0"
+  },
+  otherUserTextColor: {
+    color: '#FFFFFF',
+  },
+}))
+
+export const useUserTextStyles = (isOtherUser) => {
+  const classes = useTextStyles();
+
+  if (isOtherUser) {
+    return classes.otherUserTextColor;
+  }
+  return classes.textColor;
+}
+
+const useBubbleStyles = makeStyles(() => ({
+  bubble: {
+    background: '#F4F6FA',
+  },
+  otherUserBubble: {
+    backgroundImage: 'linear-gradient(225deg, #6CC1FF 0%, #3A8DFF 100%)',
+  },
+}))
+
+export const useUserBubbleStyles = (isOtherUser) => {
+  const classes = useBubbleStyles();
+  if (isOtherUser) {
+    return classes.otherUserBubble;
+  }
+  return classes.bubble;
+}
+
+const useBorderStyles = makeStyles(() => ({
+  textBorderRadius: {
+    borderRadius: '10px 10px 0 10px',
+  },
+  otherUsertextBorderRadius: {
+    borderRadius: '0 10px 10px 10px',
+  },
+  imgBorderRadius: {
+    borderRadius: '0 0 0 10px',
+  },
+  otherUserImgBorderRadius: {
+    borderRadius: '0 0 10px 10px',
+  }
+}))
+
+export const useUserBorderStyles = (isOtherUser, hasImg) => {
+  const classes = useBorderStyles();
+
+  if (isOtherUser) {
+    return hasImg ? 
+      classes.otherUserImgBorderRadius :
+      classes.otherUsertextBorderRadius;
+  }
+
+  return hasImg ?
+    classes.imgBorderRadius :
+    classes.textBorderRadius;
+}
+
+
+

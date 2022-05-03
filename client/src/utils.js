@@ -54,3 +54,5 @@ export const optimizeImgUrl = (url) => {
   if (splits.length !== 2) return url;
   return  `https://res.cloudinary.com/dsoagesap/image/upload/w_250/dpr_auto/q_auto/f_auto/${splits[1]}`
 }
+
+export const isEmptyObject = (obj) => Object.keys(obj).length === 0;

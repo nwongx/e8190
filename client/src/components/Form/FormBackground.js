@@ -1,16 +1,13 @@
 import React from "react";
 import {
   Typography,
-  Box
+  Box,
+  Grid
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
     background: "linear-gradient(181deg, rgb(59, 141, 255, 0.8), rgb(134, 185, 255, 0.8)), url(./bg-img.png)",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
@@ -39,8 +36,12 @@ const FormBackground = () => {
   const classes = useStyles();
 
   return (
-    <Box
+    <Grid
       className={classes.root}
+      container
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
     >
       <Box
         className={classes.contentContainer}
@@ -57,7 +58,7 @@ const FormBackground = () => {
           Converse with anyone<br />with any language
         </Typography>
       </Box>
-    </Box>
+    </Grid>
   )
 }
 

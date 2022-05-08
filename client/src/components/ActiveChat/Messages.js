@@ -5,7 +5,7 @@ import {
   SenderBubbleWrapper,
   OtherUserBubbleWrapper
 } from './index';
-import { useBubbleFactory } from '../../hook';
+import { useBubbleFactory } from '../../hooks';
 
 const Messages = (props) => {
   const { messages, otherUser, userId } = props;

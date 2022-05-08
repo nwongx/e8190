@@ -3,7 +3,7 @@ import { Box, Typography, Avatar } from "@material-ui/core";
 import React from "react";
 import {
   useBubbleType
-} from "../../hook";
+} from "../../hooks";
 
 
 const useStyles = makeStyles(() => ({

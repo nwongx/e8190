@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Typography } from '@material-ui/core';
-import { useUserBorderStyles, useUserBubbleStyles, useUserTextStyles } from '../../hook';
+import { useUserBorderStyles, useUserBubbleStyles, useUserTextStyles } from '../../hooks';
 
 const useStyles = makeStyles(() => ({
   text: {

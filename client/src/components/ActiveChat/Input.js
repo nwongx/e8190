@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { FormControl, FilledInput } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { SelectImgButton, UnselectImgButton } from './index';
@@ -18,25 +18,19 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-/**
- * other Approaches
- * 1. create a new axios instance (waste for an api)
- * 2. adding checking to existing interceptors (do not want to modify existing code)
- */
-axios.interceptors.request.use(async function (config) {
-  delete config.headers['x-access-token'] //preventing cors error
-  return config;
-}, null, {
-  runWhen: (config) => /^https:\/\/api.cloudinary.com/.test(config.url)
-})
-
 const uploadSignedImgs = async (imgs) => {
   const formDatas = await Promise.all(imgs.map(async (img) => await createFormData(img)))
 
   return await Promise.all(formDatas.map((formData) => {
     return axios.post(
       `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`,
-      formData
+      formData,
+      {
+        transformRequest: function(data, headers) {
+          delete headers['x-access-token'];
+          return data;
+        }
+      }
     )
   }))
 }
@@ -47,13 +41,13 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
   const [selectedImgs, setSelectedImgs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const memoizedHandleChange = useCallback((event) => {
+  const handleChange = (event) => {
     setText(event.target.value);
-  }, [setText]);
+  };
 
-  const memoizedUnselectHandleChange = useCallback(() => {
+  const unselectHandleChange = () => {
     setSelectedImgs([]);
-  }, [setSelectedImgs])
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -95,11 +89,11 @@ const Input = ({ otherUser, conversationId, user, postMessage }) => {
           placeholder="Type something..."
           value={text}
           name="text"
-          onChange={memoizedHandleChange}
+          onChange={handleChange}
           endAdornment={
             selectedImgs.length === 0 ?
               <SelectImgButton onChange={setSelectedImgs} /> :
-              <UnselectImgButton onClick={memoizedUnselectHandleChange} />
+              <UnselectImgButton onClick={unselectHandleChange} />
           }
         />
       </FormControl>

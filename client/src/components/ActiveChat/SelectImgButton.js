@@ -1,13 +1,13 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IconButton } from "@material-ui/core";
 import PhotoLibraryOutlinedIcon from '@material-ui/icons/PhotoLibraryOutlined';
 
 const SelectImgButton = ({ onChange }) => {
   const [imgs, setImgs] = useState([]);
 
-  const memoizedOnChangeHandler = useCallback((e) => {
+  const onChangeHandler = (e) => {
     setImgs([...e.target.files]);
-  }, [setImgs])
+  }
 
   useEffect(() => {
     onChange(imgs);
@@ -21,7 +21,7 @@ const SelectImgButton = ({ onChange }) => {
         multiple
         type="file"
         hidden
-        onChange={memoizedOnChangeHandler}
+        onChange={onChangeHandler}
       />
       <IconButton
         color="secondary"

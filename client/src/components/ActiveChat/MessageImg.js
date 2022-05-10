@@ -15,7 +15,7 @@ const MessageImg = ({ url, hasText, isOtherUser }) => {
         borderRadius,
       }}
       src={url}
-      alt="img-message"
+      alt=""
     />
   )
 }

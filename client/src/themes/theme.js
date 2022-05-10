@@ -12,7 +12,7 @@ export const theme = createMuiTheme({
       letterSpacing: 0,
       fontWeight: "bold"
     },
-    h5: { 
+    h5: {
       fontSize: "1.625rem",
       fontWeight: "bold",
     }
@@ -49,5 +49,35 @@ export const theme = createMuiTheme({
   palette: {
     primary: { main: primaryMainColor },
     secondary: { main: secondaryMainColor }
-  }
+  },
+  otherUserBubble: {
+    background: 'linear-gradient(225deg, #6CC1FF 0%, #3A8DFF 100%)',
+  },
+  senderBubble: {
+    background: '#F4F6FA'
+  },
+  bubble: {
+    header: {
+      fontSize: 11,
+      color: '#BECCE2',
+      fontWeight: 'bold',
+      marginBottom: 5,
+    },
+    multiImgAspectRatio: { aspectRatio: '16/12' },
+    imgAspectRatio: { aspectRatio: '1' },
+    imgTextAspectRatio: { aspectRatio: '8/7' },
+    imgContainer: { width: 135 },
+    text: {
+      fontSize: 14,
+      letterSpacing: -0.2,
+      padding: 8,
+      fontWeight: 'bold',
+    },
+    grid: {
+      display: 'grid',
+      gridTemplateColumns: '115px 115px',
+      columnGap: 5,
+      rowGap: 5
+    }
+  },
 });

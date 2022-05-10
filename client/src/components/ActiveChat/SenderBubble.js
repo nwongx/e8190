@@ -11,55 +11,36 @@ import {
 } from "../../hooks";
 import MessageImg from "./MessageImg";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-end"
   },
-  date: {
-    fontSize: 11,
-    color: '#BECCE2',
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
+  date: theme.bubble.header,
   bubble: {
-    background: '#F4F6FA',
+    background: theme.senderBubble.background,
     borderRadius: '10px 10px 0 10px',
   },
   imgTextBubble: {
-    background: '#F4F6FA',
+    background: theme.senderBubble.background,
     borderRadius: '0 0 0 10px',
   },
   text: {
-    fontSize: 14,
-    letterSpacing: -0.2,
-    padding: 8,
-    fontWeight: 'bold',
+    ...theme.bubble.text,
     color: "#91A3C0"
   },
   imgContainer: {
-    width: 135,
-    aspectRatio: '1',
+    ...theme.bubble.imgContainer,
+    ...theme.bubble.imgAspectRatio
   },
-  multiImgGrid: {
-    display: 'grid',
-    gridTemplateColumns: '115px 115px',
-    columnGap: 5,
-    rowGap: 5
-  },
-  multiImgContainer: {
-    aspectRatio: '16/12',
-  },
+  multiImgGrid: theme.bubble.grid,
+  multiImgContainer: theme.bubble.multiImgAspectRatio,
+  imgWithTextContainer: theme.bubble.imgContainer,
+  imgWithTextInnerContainer: theme.bubble.imgTextAspectRatio,
   multiImgWithTextVSpace: {
     marginTop: 12,
   },
-  imgWithTextContainer: {
-    width: 135,
-  },
-  imgWithTextInnerContainer: {
-    aspectRatio: '16/14'
-  }
 }))
 
 const SenderBubble = ({ message, time }) => {
@@ -78,7 +59,7 @@ const SenderBubble = ({ message, time }) => {
       {
         bubbleType === IMG_TYPE &&
         <Box className={classes.imgContainer}>
-          <MessageImg url={message.attachments[0]}/>
+          <MessageImg url={message.attachments[0]} />
         </Box>
       }
       {

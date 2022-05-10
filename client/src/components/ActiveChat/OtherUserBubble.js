@@ -11,7 +11,7 @@ import {
 } from "../../hooks";
 import MessageImg from "./MessageImg";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
@@ -21,49 +21,30 @@ const useStyles = makeStyles(() => ({
     marginRight: 11,
     marginTop: 6,
   },
-  usernameDate: {
-    fontSize: 11,
-    color: '#BECCE2',
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
+  usernameDate: theme.bubble.header,
   bubble: {
-    backgroundImage: 'linear-gradient(225deg, #6CC1FF 0%, #3A8DFF 100%)',
+    backgroundImage: theme.otherUserBubble.background,
     borderRadius: '0 10px 10px 10px',
   },
   imgTextBubble: {
-    backgroundImage: 'linear-gradient(225deg, #6CC1FF 0%, #3A8DFF 100%)',
+    backgroundImage: theme.otherUserBubble.background,
     borderRadius: '0 0 10px 10px',
   },
   text: {
-    fontSize: 14,
-    letterSpacing: -0.2,
-    padding: 8,
-    fontWeight: 'bold',
+    ...theme.bubble.text,
     color: '#FFFFFF',
   },
   imgContainer: {
-    width: 135,
-    aspectRatio: '1',
+    ...theme.bubble.imgContainer,
+    ...theme.bubble.imgAspectRatio
   },
-  multiImgGrid: {
-    display: 'grid',
-    gridTemplateColumns: '115px 115px',
-    columnGap: 5,
-    rowGap: 5
-  },
-  multiImgContainer: {
-    aspectRatio: '16/12',
-  },
+  multiImgGrid: theme.bubble.grid,
+  multiImgContainer: theme.bubble.multiImgAspectRatio,
+  imgWithTextContainer: theme.bubble.imgContainer,
+  imgWithTextInnerContainer: theme.bubble.imgTextAspectRatio,
   multiImgWithTextVSpace: {
     marginTop: 12,
   },
-  imgWithTextContainer: {
-    width: 135,
-  },
-  imgWithTextInnerContainer: {
-    aspectRatio: '16/14'
-  }
 }))
 
 const OtherUserBubble = ({ otherUser, message, time }) => {
